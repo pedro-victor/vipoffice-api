@@ -5,7 +5,7 @@ defmodule VipOffice.Auth.ValidatePermission do
   @behaviour Plug
 
   import Plug.Conn
-  import Phoenix.Controller, only: [json: 2, put_view: 2, render: 3]
+  import Phoenix.Controller, only: [put_view: 2, render: 3]
 
   @spec init(any) :: any
   def init(default), do: default
@@ -32,7 +32,7 @@ defmodule VipOffice.Auth.ValidatePermission do
 
   defp validate_permission(_conn, _permission), do: false
 
-  defp handle_error_response(conn, error) do
+  defp handle_error_response(conn, _error) do
     conn
     |> put_status(403)
     |> put_view(VipOfficeWeb.ErrorView)

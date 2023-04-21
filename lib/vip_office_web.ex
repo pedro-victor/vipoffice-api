@@ -26,17 +26,30 @@ defmodule VipOfficeWeb do
     end
   end
 
-  def view do
+  @doc false
+  def html do
     quote do
-      use Phoenix.View,
-        root: "lib/vip_office_web/templates",
-        namespace: VipOfficeWeb
+      @moduledoc false
+      use Phoenix.Component
 
-      # Import convenience functions from controllers
-      import Phoenix.Controller,
-        only: [get_flash: 1, get_flash: 2, view_module: 1, view_template: 1]
+      unquote(view_helpers())
+    end
+  end
 
-      # Include shared imports and aliases for views
+  @doc false
+  def live_view do
+    quote do
+      @moduledoc false
+      use Phoenix.LiveView
+      unquote(view_helpers())
+    end
+  end
+
+  @doc false
+  def live_component do
+    quote do
+      @moduledoc false
+      use Phoenix.LiveComponent
       unquote(view_helpers())
     end
   end
@@ -58,11 +71,14 @@ defmodule VipOfficeWeb do
 
   defp view_helpers do
     quote do
-      # Import basic rendering functionality (render, render_layout, etc)
-      import Phoenix.View
+      # Use all HTML functionality (forms, tags, etc)
+      use Phoenix.HTML
 
-      import VipOfficeWeb.ErrorHelpers
-      alias VipOfficeWeb.Router.Helpers, as: Routes
+      # Import convenience functions for LiveView rendering
+      import Phoenix.LiveView.Helpers
+
+      # Import dashboard built-in functions
+      import Phoenix.LiveDashboard.Helpers
     end
   end
 
