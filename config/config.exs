@@ -7,6 +7,9 @@
 # General application configuration
 import Config
 
+config :vip_office,
+  ecto_repos: [VipOffice.Repo]
+
 # Configures the endpoint
 config :vip_office, VipOfficeWeb.Endpoint,
   url: [host: "localhost"],

@@ -10,6 +10,8 @@ defmodule VipOffice.Application do
     children = [
       # Start the Telemetry supervisor
       VipOfficeWeb.Telemetry,
+      # Start the Ecto repository
+      VipOffice.Repo,
       # Start the PubSub system
       {Phoenix.PubSub, name: VipOffice.PubSub},
       # Start the Endpoint (http/https)
