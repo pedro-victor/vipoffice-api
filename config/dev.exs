@@ -1,11 +1,11 @@
 import Config
 
 # Configure your database
-config :vip_office, Apionly.Repo,
+config :vip_office, VipOffice.Repo,
   username: "postgres",
   password: "postgres",
   hostname: "localhost",
-  database: "apionly_dev",
+  database: "vipoffice_dev",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10

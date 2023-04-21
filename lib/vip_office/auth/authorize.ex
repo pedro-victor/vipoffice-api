@@ -39,7 +39,7 @@ defmodule VipOffice.Auth.Authorize do
   defp handle_error_response(conn, error) do
     conn
     |> put_status(401)
-    |> put_view(VipOfficeWeb.ErrorView)
+    |> put_view(VipOfficeWeb.ErrorJSON)
     |> render("401.json", %{error: error})
     |> halt()
   end

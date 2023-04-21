@@ -1,4 +1,4 @@
-defmodule VipOfficeWeb.API.MessageController do
+defmodule VipOfficeWeb.MessageController do
   use VipOfficeWeb, :controller
 
   @metadata %{api: "vip-office", branch: "master"}

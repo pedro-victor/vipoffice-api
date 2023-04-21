@@ -17,47 +17,14 @@ defmodule VipOfficeWeb do
   and import those modules here.
   """
 
-  def controller do
-    quote do
-      use Phoenix.Controller, namespace: VipOfficeWeb
 
-      import Plug.Conn
-      alias VipOfficeWeb.Router.Helpers, as: Routes
-    end
-  end
-
-  @doc false
-  def html do
-    quote do
-      @moduledoc false
-      use Phoenix.Component
-
-      unquote(view_helpers())
-    end
-  end
-
-  @doc false
-  def live_view do
-    quote do
-      @moduledoc false
-      use Phoenix.LiveView
-      unquote(view_helpers())
-    end
-  end
-
-  @doc false
-  def live_component do
-    quote do
-      @moduledoc false
-      use Phoenix.LiveComponent
-      unquote(view_helpers())
-    end
-  end
+  def static_paths, do: ~w(assets fonts images favicon.ico robots.txt)
 
   def router do
     quote do
-      use Phoenix.Router
+      use Phoenix.Router, helpers: false
 
+      # Import common connection and controller functions to use in pipelines
       import Plug.Conn
       import Phoenix.Controller
     end
@@ -69,16 +36,24 @@ defmodule VipOfficeWeb do
     end
   end
 
-  defp view_helpers do
+  def controller do
     quote do
-      # Use all HTML functionality (forms, tags, etc)
-      use Phoenix.HTML
+      use Phoenix.Controller,
+        formats: [:html, :json],
+        layouts: [html: VipOfficeWeb.Layouts]
 
-      # Import convenience functions for LiveView rendering
-      import Phoenix.LiveView.Helpers
+      import Plug.Conn
 
-      # Import dashboard built-in functions
-      import Phoenix.LiveDashboard.Helpers
+      unquote(verified_routes())
+    end
+  end
+
+  def verified_routes do
+    quote do
+      use Phoenix.VerifiedRoutes,
+        endpoint: VipOfficeWeb.Endpoint,
+        router: VipOfficeWeb.Router,
+        statics: VipOfficeWeb.static_paths()
     end
   end
 

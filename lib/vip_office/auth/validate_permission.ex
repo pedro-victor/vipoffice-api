@@ -35,7 +35,7 @@ defmodule VipOffice.Auth.ValidatePermission do
   defp handle_error_response(conn, _error) do
     conn
     |> put_status(403)
-    |> put_view(VipOfficeWeb.ErrorView)
+    |> put_view(VipOfficeWeb.ErrorJSON)
     |> render("403.json", %{})
     |> halt()
   end

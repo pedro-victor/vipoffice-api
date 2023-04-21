@@ -13,7 +13,10 @@ config :vip_office,
 # Configures the endpoint
 config :vip_office, VipOfficeWeb.Endpoint,
   url: [host: "localhost"],
-  render_errors: [view: VipOfficeWeb.ErrorView, accepts: ~w(json), layout: false],
+  render_errors: [
+    formats: [json: VipOfficeWeb.ErrorJSON],
+    layout: false
+  ],
   pubsub_server: VipOffice.PubSub,
   live_view: [signing_salt: "q6eTnZiL"]
 
@@ -21,6 +24,8 @@ config :vip_office, VipOfficeWeb.Endpoint,
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
+
+config :logger, handle_sasl_reports: true
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason

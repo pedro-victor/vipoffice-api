@@ -26,7 +26,7 @@ defmodule VipOfficeWeb.Endpoint do
   # :code_reloader configuration of your endpoint.
   if code_reloading? do
     plug Phoenix.CodeReloader
-    plug Phoenix.Ecto.CheckRepoStatus, otp_app: :sample
+    plug Phoenix.Ecto.CheckRepoStatus, otp_app: :vip_office
   end
 
   plug Plug.RequestId

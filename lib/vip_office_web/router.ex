@@ -18,7 +18,7 @@ defmodule VipOfficeWeb.Router do
     plug VipOffice.Auth.ValidatePermission, Permissions.read_admin_messages()
   end
 
-  scope "/api", VipOfficeWeb.API, as: :api do
+  scope "/api", VipOfficeWeb, as: :api do
     pipe_through :api
 
     scope "/messages" do
@@ -26,15 +26,17 @@ defmodule VipOfficeWeb.Router do
     end
   end
 
-  scope "/api", VipOfficeWeb.API, as: :api do
+  scope "/api", VipOfficeWeb, as: :api do
     pipe_through [:api, :authorization]
+
+    resources "/users", UserController, except: [:new, :edit]
 
     scope "/messages" do
       get "/protected", MessageController, :protected
     end
   end
 
-  scope "/api", VipOfficeWeb.API, as: :api do
+  scope "/api", VipOfficeWeb, as: :api do
     pipe_through [:api, :authorization, :validate_permissions]
 
     scope "/messages" do
